@@ -1,0 +1,14 @@
+Nivelando expectativas
+
+Proposta da aula:
+Retomar pontos passados batido: 
+- Encoding
+- R Base x Pacotes externos
+- Importação e exportação de dados TXT e XLSX
+
+Importação de dados usando pacote RIO
+- Estudo de caso com a PNADc
+- Estudo de caso com o censo 2010
+
+
+

@@ -1,0 +1,154 @@
+---
+title: "A04 - Operações Básicas - Iterações"
+format: html
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+## Iterações/Loops
+
+No R, os loops são executados principalmente através do **for**.
+
+A estrutura básica de uma sintaxe com a função **for** é:
+
+**for** (*index* **in** *contador*) {
+
+*funcoes_e_comandos_que_serao_repetidos*
+
+}
+
+Suponha que você deseja imprimir na tela todos os nomes salvos em um vetor, conforme o exemplo:
+
+```{r}
+nomes <- c("José","Maria","Henrique","Paula")
+
+nomes[1]
+nomes[2]
+nomes[3]
+```
+
+Essa é uma tarefa repetitiva, certo? Leva um tempinho para fazer... e se a lista fosse maior, levaria ainda mais. Podemos, ao invés disso, usar um loop para realizar a tarefa.
+
+Veja o exemplo:
+
+```{r}
+nomes <- c("José","Maria","Henrique","Paula")
+
+for (i in nomes){
+        print(i)
+}
+
+# Repare que também podemos escrever como
+
+for (i in 1:4){
+        print(nomes[i])
+}
+
+# Também podemos adicionar funções
+
+for (i in 1:4){
+        print(paste("O nome",i,"é",nomes[i]))
+}
+```
+
+O loop é, na realidade, um conjunto de "rodadas" iterativas que realizam determinada tarefa.
+
+Na primeira rodada, executamos a tarefa desejada (por exemplo: imprimimos o primeiro nome)
+
+Na segunda rodada, executamos a MESMA TAREFA usando informações diferente (outro nome)
+
+Na terceira rodada, novamente, executamos aquela MESMA TAREFA usando outras informacoes.
+
+E assim por diante... até que as rodadas do contador se esgotem.
+
+Alguns exemplos simples:
+
+```{r}
+# Alguns exemplos um pouco menos simples... 
+
+#Exemplo 1:
+for (h in 1:10){
+        print("Ola Mundo")
+}
+
+for(i in 1:10){
+   print(x <- i+5)
+}
+```
+
+Tentem agora avaliar com cuidado o que está sendo no exemplo abaixo:
+
+```{r}
+#Exemplo 3:
+
+soma_seq=0
+
+for (n in 1:10){
+        soma_seq = soma_seq + n
+        
+        print(soma_seq)
+}
+```
+
+### Condicionais
+
+O uso de condicionais é essencial em computação. Condicionais indicam que uma ação só será realizada se uma determinada condição for cumprida.
+
+```{r}
+x = 10
+
+if( x == 10 ) {"OK"} # Altere o valor e veja que ele não retorna nada
+
+if( x == 10 ){ x = x^2; print(x) }
+
+# Podemos também incluir a condição alternativa (OU - OU SE / ELSE - ELSE IF)
+if( x == 10 ) {"x é igual a 10"} else {"x é diferente de 10"}
+
+if( x == 10 ) {"x é igual a 10"} else if(x == 100) {"x é diferente de 10"}
+
+# Complicando
+
+if( x == 10 ) {"x é 10"} else if(x == 11) {"x é 11"} else{"o que é x, afinal?"}
+
+```
+
+### Lidando com erros
+
+```{r}
+
+nomes
+
+for(i in 1:8){
+  
+  tryCatch({ expr = if(i < 4) { nomes[i]/2 } else if (i > 4) { print(i) } }, 
+             
+             error = function(x) { print(paste("mensagem de erro:",x)) }
+  )
+
+}
+
+# Pulando iterações
+for(i in 1:8){
+  
+  if(i < 4) { next } else if (i > 4) { print(i) }
+
+}
+
+# Parando iterações
+
+for(i in 1:8){
+  
+  if(i < 4) { next } else if (i == 7) { break } else if(i > 4){ print(i) }
+
+}
+
+# AQUI A ORDEM E A SEQUÊNCIA LÓGICA IMPORTA
+# Veja o exemplo:
+
+for(i in 1:8){
+  
+  if(i < 4) { next } else if (i > 3) { print(i) } else if(i == 7){ break }
+
+}
+```
