@@ -1,0 +1,62 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Análise de dados com R",
+    "section": "",
+    "text": "Introdução\nEste é um curso de análise de dados com R voltado para cientistas sociais. O curso aborda o funcionamento da linguagem de programação R e do software de desenvolvimento RStudio/Posit, visando oferecer noções gerais e operações básicas para o domínio e a autonomia na análise de dados com programação. O curso envolve operações de importação, análise, visualização, exportação e comunicação de dados, e está estruturado seguindo os eixos do livro de Wickham e Grolemund (2018). Por seguir o livro de referência, os tópicos mesclam com o inglês para estimular a adaptação ao software, à comunidade de programadores internacionais e aos manuais, que têm a língua inglesa como padrão.\nA proposta é que seja um curso “mão na massa”. Para o bom funcionamento das aulas, portanto, é importante acompanhar o conteúdo e praticar com os tutoriais e exercícios. Os materiais servirão com guias, mas recomendo que explorem o funcionamento desta ferramenta para ir conquistando o domínio.",
+    "crumbs": [
+      "Introdução"
+    ]
+  },
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "Introdução",
+    "section": "",
+    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
+    "crumbs": [
+      "Introdução"
+    ]
+  },
+  {
+    "objectID": "summary.html",
+    "href": "summary.html",
+    "title": "2  Summary",
+    "section": "",
+    "text": "In summary, this book has no content whatsoever.\n\n1 + 1\n\n[1] 2",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Summary</span>"
+    ]
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
+    "crumbs": [
+      "References"
+    ]
+  },
+  {
+    "objectID": "class01.html",
+    "href": "class01.html",
+    "title": "Capítulo 1",
+    "section": "",
+    "text": "Este é um curso de análise de dados com R voltado para cientistas sociais. O curso aborda o funcionamento da linguagem de programação R e do software de desenvolvimento RStudio/Posit, visando oferecer noções gerais e operações básicas para o domínio e a autonomia na análise de dados com programação. O curso envolve operações de importação, análise, visualização, exportação e comunicação de dados, e está estruturado seguindo os eixos do livro de Wickham e Grolemund (2018). Por seguir o livro de referência, os tópicos mesclam com o inglês para estimular a adaptação ao software, à comunidade de programadores internacionais e aos manuais, que têm a língua inglesa como padrão.",
+    "crumbs": [
+      "Capítulo 1"
+    ]
+  },
+  {
+    "objectID": "index.html#download-e-instalação",
+    "href": "index.html#download-e-instalação",
+    "title": "Análise de dados com R",
+    "section": "Download e instalação",
+    "text": "Download e instalação\nO primeiro passo é baixar os softwares R e seu auxiliar RStudio/Posit, que serve como ambiente de desenvolvimento.",
+    "crumbs": [
+      "Introdução"
+    ]
+  }
+]
