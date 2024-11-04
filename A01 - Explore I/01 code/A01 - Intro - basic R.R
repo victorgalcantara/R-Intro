@@ -35,9 +35,25 @@
 3%%2
 
 # No python não tem isso!
+# no R, pi já é identificado como um objeto que guarda o valor 3,141593...
+
 pi-2
 
 # 1.2 Introduzindo funções básicas ----
+
+#### Funções ----
+# são operações já programadas
+# (input-processo-output)
+# nome_da_função(argumentos)
+
+# Exemplo de funções
+# argumentos = input
+
+ifelse(test = 2>3,yes = "Que isso?",no ="Ah, tá.")
+ifelse # Veja como essa função está programada
+
+# Como vimos em aula, usamos funções para executar operações
+# alguns cálculos são feitos com funções, como:
 
 sqrt(16) # raíz quadrada / square roots
 
@@ -49,7 +65,7 @@ log2(16)
 
 2^4
 
-# 2. Criando objetos ----
+# 2. Criando objetos (ou guardado valores na memória) ----
 
 x <- 2
 x = 3
@@ -59,6 +75,7 @@ x+3
 x <- 1:16
 y <- sqrt(1:16)
 
+# Funções básicas para plot de gráficos
 plot(x = x,y = y)
 lines(x,y)
 
@@ -150,7 +167,7 @@ raca  <- c("Branca","Parda","Preta","Parda","Preta","Branca",
            "Parda","Amarela")
 
 d <- data.frame(educ, idad, rend,sexo,raca)
-view(d)
+View(d)
 
 # 3. Verbos importantes ----
 # Visualizar dados - fluxo de trabalho
@@ -165,91 +182,6 @@ str(d)    # Estrutura dos dados
 summary(d)      
 summary(d$rend) # sumário de uma variável numérica
 summary(d$sexo) # sumário de uma variável categórica
-
-### 4. Subset ----
-
-y <- 1:8
-
-# acessar informações guardadas em um vetor
-y[5]
-
-# acessar informações guardadas em um data.frame 
-# [Linhas,Colunas]
-d[5,3]
-
-# operações com coordenadas
-d[,"mg"] <- c(1:8) # criando nova variável
-
-df <- d[,-c(6,7,8)]    # excluindo variável
-
-d
-
-df
-
-# Subset com cifrão $ e colchetes
-
-# O cifrão é muito usado para acessar variáveis
-d$educ
-
-# Os colchetes após o cifrão é usado para acessar valores dentro da variável
-d$educ[4]
-
-# Vimos até aqui na Aula 02
-# Pulei essa parte até a linha 335
-
-# Filtrando dados
-filtro <- c(F,T,T,T,T,T,T,T)
-df <- d[filtro,]
-
-# Selecionando variáveis
-selecao <- c(T,T,T,T,T,F)
-df <- d[,selecao]
-
-# Complexificando
-filtro <- d[,"idad"] < 29
-df <- d[filtro,]
-
-selecao <- names(d) %in% c("educ","rend")
-df <- d[,selecao]
-
-# Função base para subset
-subset(x = d, subset = sexo == "F")
-subset(x = d, select = "sexo")
-
-### 5. Recodificação ----
-
-# Renda
-d[,"ln_rend"] <- log(d[,"rend"])
-
-# Raca
-d[,"vd_raca"] <- d$raca
-
-negra   <- d[,"raca"] %in% c("Preta","Parda")
-
-d[negra,"vd_raca"] <- "Negra"
-
-# Complexificando mais um pouco
-# Raca e sexo
-m_negra   <- d[,"raca"] %in% c("Preta","Parda") &
-  d[,"sexo"] == "F"
-
-m_branca   <- d[,"raca"] %in% c("Branca") &
-  d[,"sexo"] == "M"
-
-d[m_negra,"vd_raca_sexo"] <- "Mulher negra"
-d[m_branca,"vd_raca_sexo"] <- "Mulher branca"
-
-h_negro   <- d[,"raca"] %in% c("Preta","Parda") & d[,"sexo"] == "M"
-
-h_branco   <- d[,"raca"] %in% c("Branca") & d[,"sexo"] == "M"
-
-h_amarelo   <- d[,"raca"] %in% c("Amarela") & d[,"sexo"] == "M"
-
-d[h_negro,"vd_raca_sexo"] <- "Homem negro"
-d[h_branco,"vd_raca_sexo"] <- "Homem branco"
-d[h_amarelo,"vd_raca_sexo"] <- "Homem amarelo"
-
-# vocês entenderam...
 
 # 3. Operações lógicas ----
 # São operações em testamos uma sentença tendo como resultado:
@@ -287,104 +219,19 @@ x <- 1:10
 2 > 2 & 2 == 2
 2 > 1 & 2 == 2
 
-# 5. Condições ----
-# se verificado isso, aplique aquilo
-# else: ou, se não verificado, aplique aquilo outro
+# Desafios ----
 
-if(2 > 3){"Não sei lógica"}else{"Sei lógica!"} # Teste executar apenas 
-                                               # a primeira parte
-TRUE+TRUE+FALSE
+# 1. Crie três objetos que guardam vetores com valores 
+# de tipos diferentes (numérico, caracteres e lógicos)
 
-true_igual_um <- c(T,T,T,F)
-true_igual_um + 1
+# 2. Verifique se os vetores têm a mesma quantidade de valores
 
-# 6. Loops ----
-# Loops são operações de iteração fundamentais na automação
-# Trabalho com processos repetitivos
+# 3. Crie um data.frame/base de dados com os vetores
 
-for(i in 1:10){
-  print(i)
-}
+# 4. Localize o valor guardado na posição 
+# seus_dados[2,1] : segunda linha e terceira coluna
 
-a=1
-while (a<=10)  {
-  a=a+1
-  print (a)
-}
+# 5. Faça um teste lógico para verificar se o primeiro valor do vetor
+# numérico é maior ou igual ao último valor do vetor numérico da sua
+# base de dados
 
-a=1
-repeat {
-  print (a)
-  a=a+1
-  if (a >= 10) break()
-}
-
-# 7. Funções ----
-# são operações já programadas
-# (input-processo-output)
-# nome_da_função(argumentos)
-
-# Exemplo de funções
-# argumentos = input
-
-ifelse(test = 2>3,yes = "Que isso?",no ="Ah, tá.")
-ifelse # Veja como essa função está programada
-
-sum(true_igual_um)
-
-# 8. Pacotes ----
-# são conj. de funções
-# devem ser instalados    : install.packages()
-# deve carregar na memória: library()
-install.packages("tidyverse") # Principal biblioteca de funções para manuseio
-library(tidyverse) # Pegando na biblioteca
-require(dplyr)     # Nem sempre é necessário
-
-# 9. Navegação no computador ----
-# wd : Working Directory = Diretório/pasta de trabalho
-
-getwd() # Em qual diretório/pasta estou trabalhando?
-dir()   # o que tem nesse diretório/pasta?
-
-setwd() # Mude o diretório de trabalho
-dir.create("minha pasta") # Crie uma pasta com este nome
-
-# Parte II - Classes de objetos ------------------------------------------------
-
-# Funções que facilitam a nossa vida: pacote TIDYVERSE
-
-# 6. Usando tidyverse ----
-
-## 6.1 Select e Filter ----
-# selecionar variáveis e filtrar casos
-
-# Jovens
-d <- d %>% filter(idad > 15  & idad < 29)
-
-d <- d %>% select(educ,rend)
-
-## 6.1 Verbo "mutate" ----
-
-d <- mutate(d, "lnRenda"=log(rend))
-
-d <- mutate(d, "vd_raca"= case_when(
-  raca == "Preta" ~ "Negra",
-  raca == "Parda" ~ "Negra",
-  raca == "Branca" ~ "Branca",
-  raca == "Indígena" ~ "Indígena",
-  raca == "Amarela" ~ "Amarela",
-))
-
-d <- mutate(d, "sexo_raca" = case_when(
-  sexo == "F" & raca == "Branca"   ~ "Mulher Branca",
-  sexo == "F" & raca == "Preta"    ~ "Mulher Preta",
-  sexo == "F" & raca == "Parda"    ~ "Mulher Parda",
-  sexo == "F" & raca == "Indígena" ~ "Mulher Indígena",
-  sexo == "F" & raca == "Amarela" ~ "Mulher Amarela",
-  
-  sexo == "M" & raca == "Branca"   ~ "Homem Branco",
-  sexo == "M" & raca == "Preta"    ~ "Homem Preto",
-  sexo == "M" & raca == "Parda"    ~ "Homem Pardo",
-  sexo == "M" & raca == "Indígena" ~ "Homem Indígena",
-  sexo == "M" & raca == "Amarela" ~ "Mulher Amarelo",
-))

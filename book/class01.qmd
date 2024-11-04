@@ -1,3 +1,0 @@
-# Capítulo 1 {.unnumbered}
-
-Este é um curso de análise de dados com R voltado para cientistas sociais. O curso aborda o funcionamento da linguagem de programação R e do software de desenvolvimento RStudio/Posit, visando oferecer noções gerais e operações básicas para o domínio e a autonomia na análise de dados com programação. O curso envolve operações de importação, análise, visualização, exportação e comunicação de dados, e está estruturado seguindo os eixos do livro de [Wickham e Grolemund (2018)](https://r4ds.had.co.nz/). Por seguir o livro de referência, os tópicos mesclam com o inglês para estimular a adaptação ao software, à comunidade de programadores internacionais e aos manuais, que têm a língua inglesa como padrão.
