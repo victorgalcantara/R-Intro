@@ -1,4 +1,4 @@
-# Autor Francisco Alves Almeida
+# Autor ##################
 # Desafio da primeira aula
 
 vetor_numeros <- c(5,2,3,4,5,1)

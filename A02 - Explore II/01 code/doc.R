@@ -1,1 +1,0 @@
-# Esse é um arquivo na linguagem R
