@@ -14,11 +14,13 @@ p_load(tidyverse,rio,janitor,patchwork,geobr,sf,PNADcIBGE)
 # Work directories
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
+options(scipen = 9999)
+
 # 1. Import data ---------------------------------------------------------------
 
 # Pnad-c
 
-pnadc_2024 <- get_pnadc( year = 2024,
+pnadc_2025 <- get_pnadc( year = 2025,
           quarter = 1, # trimestre
           design = F,   # estrutura específica survey design
           deflator = F,
@@ -26,7 +28,6 @@ pnadc_2024 <- get_pnadc( year = 2024,
           vars = c("UF","Capital","RM_RIDE",
                    "V1022", # Área rural/urbana
                    "V1023", # Tipo de área
-                   "V1028", # Peso amostral
                    "V2009", # Idade
                    "V2007", # Sexo
                    "V2010", # Cor/Raca
@@ -39,17 +40,19 @@ pnadc_2024 <- get_pnadc( year = 2024,
                    "VD4009",# Pos ocupacional
                    "V4010", # Código ocup princip
                    "VD4010",# Agrupamento ocup1
-                   "VD4011" # Agrupamento ocup2
+                   "VD4011", # Agrupamento ocup2
+                   
+                   "V1028" # Peso amostral
           ) )
 
 # Salvando dados
 library(arrow)
-arrow::write_parquet(pnadc_2024,"D:/01 - data/IBGE/PNADc/2024/pnadc_2024.parquet")
-pnadc_2024 <- read_parquet("D:/01 - data/IBGE/PNADc/2024/pnad2024.parquet")
+arrow::write_parquet(pnadc_2025,"C:/Users/victo/OneDrive/03_work/acadêmico/workshops/LAPS 2025/01 - data/IBGE/PNADc/2025/pnadc_2025.parquet")
+pnadc_2025 <- read_parquet("C:/Users/victo/OneDrive/03_work/acadêmico/workshops/LAPS 2025/01 - data/IBGE/PNADc/2025/pnadc_2025.parquet")
 
 # Renomeando vars
 
-pnadc_2024 <- pnadc_2024 %>% rename(.,
+pnadc_2025 <- pnadc_2025 %>% rename(.,
                                     area = "V1022", # Área rural/urbana
                                     tipoArea = "V1023", # Tipo de área
                                     peso = "V1028", # Peso amostral
@@ -68,7 +71,7 @@ pnadc_2024 <- pnadc_2024 %>% rename(.,
                                     classeOcup2="VD4011" # Agrupamento ocup2
 )
 
-pnadc_2024 <- pnadc_2024 %>% 
+pnadc_2025 <- pnadc_2025 %>% 
   mutate(.,
          # Formatando para numérico
          anosEst = ifelse(
@@ -79,38 +82,38 @@ pnadc_2024 <- pnadc_2024 %>%
          ocup = as.numeric(ocup),
   )
 
-pnadc_2024_sp <- pnadc_2024 %>% filter(UF == "São Paulo")
+pnadc_2025_sp <- pnadc_2025 %>% filter(UF == "São Paulo")
 
 ## 2.1 Medidas de tendência central ----
-mean(pnadc_2024$rendOcup, na.rm=T)     # média
-median(pnadc_2024$rendOcup, na.rm=T)   # mediana
+mean(pnadc_2025$rendOcup, na.rm=T)     # média
+median(pnadc_2025$rendOcup, na.rm=T)   # mediana
 
 # Medidas de dispersão
-var(pnadc_2024$rendOcup, na.rm=T )    # variância
-sd(pnadc_2024$rendOcup, na.rm=T)     # desvio-padrão
+var(pnadc_2025$rendOcup, na.rm=T )    # variância
+sd(pnadc_2025$rendOcup, na.rm=T)     # desvio-padrão
 
 # Funções úteis para descrição
-summary(pnadc_2024$rendOcup)
-psych::describe(pnadc_2024$rendOcup)
+summary(pnadc_2025$rendOcup)
+psych::describe(pnadc_2025$rendOcup)
 
-table(pnadc_2024$raca)
+table(pnadc_2025$raca)
 
 # Cálculos por grupos
 # group_by()
 
-t_ocup <- pnadc_2024 %>% group_by(classeOcup1) %>% summarise(
+t_ocup <- pnadc_2025 %>% group_by(classeOcup1) %>% summarise(
   n = n(),
   me_educ = round(mean(anosEst),1),
   me_rend = mean(rendOcup,na.rm=T)
 ) %>% arrange(-me_rend)
 
-t_sexo <- pnadc_2024 %>% group_by(sexo) %>% summarise(
+t_sexo <- pnadc_2025 %>% group_by(sexo) %>% summarise(
   n = n(),
   me_educ = round(mean(anosEst),1),
   me_rend = mean(rendOcup,na.rm=T)
 ) %>% arrange(-me_rend)
 
-t_educ <- pnadc_2024 %>% group_by(nvlMaisElevado) %>% summarise(
+t_educ <- pnadc_2025 %>% group_by(nvlMaisElevado) %>% summarise(
   n = n(),
   me_rend = mean(rendOcup,na.rm=T),
   ma_rend = median(rendOcup,na.rm=T)
@@ -118,7 +121,7 @@ t_educ <- pnadc_2024 %>% group_by(nvlMaisElevado) %>% summarise(
 
 ## 2.2 Tabelas de frequência ----
 
-tab1 <- table(pnadc_2024$sexo,pnadc_2024$raca)
+tab1 <- table(pnadc_2025$sexo,pnadc_2025$raca)
 
 tab1_prop <- prop.table(tab1,margin = 1) # margin 1 = percentual na linha
 
@@ -128,30 +131,32 @@ tab1_prop <- prop.table(tab1,margin = 1) # margin 1 = percentual na linha
 # Grammar of Graphics
 
 # Barras
-ggplot(data=pnadc_2024,aes(x = sexo))+
+ggplot(data=pnadc_2025,aes(x = sexo))+
   theme_bw()+
   geom_bar(fill="steelblue")+
   scale_y_continuous(expand = c(0.01,0))+
   scale_x_discrete(name="")
 
 # Histograma
-ggplot(data=pnadc_2024,aes(x = rendOcup))+
+ggplot(data=pnadc_2025,aes(x = rendOcup))+
   theme_bw()+
-  geom_histogram()
+  geom_histogram(bins = 50)+
+  scale_x_continuous(limits = c(0,50000),breaks = seq(0,100000,5000))
 
 # Densidade
-ggplot(data=pnadc_2024,aes(x = rendOcup))+
+ggplot(data=pnadc_2025,aes(x = rendOcup))+
   theme_bw()+
-  geom_density()
+  geom_density()+
+  scale_x_continuous(limits = c(0,50000),breaks = seq(0,100000,5000))
 
 # Boxplot
-ggplot(data=pnadc_2024,aes(x = nvlMaisElevado,y=log(rendOcup)))+
+ggplot(data=pnadc_2025,aes(x = nvlMaisElevado,y=log(rendOcup)))+
   theme_bw()+
   geom_boxplot(fill="steelblue")+
   coord_flip()
 
 # Dispersão
-ggplot(data=pnadc_2024,aes(x = anosEst,y=log(rendOcup)))+
+ggplot(data=pnadc_2025,aes(x = anosEst,y=log(rendOcup)))+
   theme_bw()+
   geom_point()+
   scale_x_continuous(name="Anos de escolarização")+
